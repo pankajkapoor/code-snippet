@@ -1,0 +1,23 @@
+{
+  "name": "mean_hh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/96ankur/helping_hands.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/96ankur/helping_hands/issues"
+  },
+  "homepage": "https://github.com/96ankur/helping_hands#readme",
+  "dependencies": {
+    "nexmo": "^2.3.2",
+    "textlocal": "^0.1.1"
+  }
+}
