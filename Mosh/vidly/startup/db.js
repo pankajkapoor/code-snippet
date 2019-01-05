@@ -3,7 +3,6 @@ const winston = require('winston')
 module.exports = function(){
 
     mongoose.connect('mongodb://localhost/vidly')
-    .then(() => winston.info('Connected to MongoDB...'))
-
+    .then(() => console.log('Connected to MongoDB...'))
 }
 

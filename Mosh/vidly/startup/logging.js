@@ -1,5 +1,5 @@
 
-const winston = require('winston')
+const winston = require('winston')  // working only with 2.4.0 version of winston
 require('winston-mongodb');
 require('express-async-errors')
 
@@ -11,13 +11,13 @@ module.exports = function(){
     //     process.exit(1);                                     // and not for asynchronous operation
     // })
 
-    winston.handleExceptions(
-        new winston.transports.Console({colorize: true, prettyPrint: true}),
+    winston.handleExceptions(                                                  // This method works only for exception
+        new winston.transports.Console({colorize: true, prettyPrint: true}),  // but not for unhandled Promises
         new winston.transports.File({filename: 'uncaughtExceptions.log'}))
     
     process.on('unhandledRejection', (ex)=>{
-        throw(ex);                  
-        // winston.error(ex.message, ex);                        
+        throw(ex);                                   // for unhandled exception we throw the exception which is 
+        // winston.error(ex.message, ex);            // caught by winston.handleExceptions            
         // process.exit(1);                    
     })
     
@@ -25,5 +25,6 @@ module.exports = function(){
     winston.add(winston.transports.MongoDB,{
         db : 'mongodb://localhost/vidly',
         level: 'error'
+         // level: 'info'  as info is the third logging level therefore error, warn, info will be logged into the MongoDB
         })
 }
