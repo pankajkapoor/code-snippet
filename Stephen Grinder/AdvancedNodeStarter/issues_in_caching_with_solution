@@ -1,0 +1,117 @@
+
+        PROBLEM                     |                  SOLUTION
+                                    |
+Caching code isn't easily reusable  |      Hook in Mongoose's query
+reusable anywhere else in our       |       generation and execution
+codebase                            |               process
+                                    |
+Cached values never expire          |      Add timeout to values
+                                    |      assigned to redis. Also
+                                    |      ability to reset all values tied
+                                    |       to some specific event
+                                    |
+Cached keys won't work when         |      Figure out a more robust
+we introduced ohter collections     |       solution for generation cache
+or query options                    |               keys
+                                    |
+                                    |
+
+---------------------------- SOLUTION 1 --------------------------------------------------
+
+
+const query = Person
+  .find({ occupation: /host/ })
+  .where('name.last').equals('Ghost')
+  .where('age').gt(17).lt(66)
+  .where('likes').in(['vaporizing', 'talking'])
+  .limit(10)
+  .sort('-occupation')
+  .select('name occupation');
+
+// CHECK TO SEE IF THIS QUERY HAS ALREADY BEEN FETCHED IN REDIS
+
+//--------- There are total of 3 ways for executing  a query-------------------------
+
+1.
+query.exec((err, result)=> console.log(result));      // this exec() function execute the query and it takes a callback 
+
+2.
+
+query.then(result => console.log(result))         /// this command inturn calls the exec function
+
+3.
+
+const result = await query;   // this is what we are doing inside of our codebase, that is, we are executing queries by executing this line
+
+
+
+                    THE SOLUTION TO THE FIRST ISSUE IS TO FIND A WAY TO OVERWRITE THE exec() FUNCTION
+
+query.exec = function(){
+    // to check to see if this query has already been executed
+    // and if it has return the result rightway
+
+        const result = client.get('query.key');
+        if(result){
+            return result;
+        }
+
+    // otherwise issue the query * as normal *
+
+        const result = runTheOriginalExecFunction();
+
+
+    // then save that value in redis
+
+        client.set('query key', result);
+
+        return result;
+
+}
+
+
+
+
+
+---------------------------- SOLUTION 2 --------------------------------------------------
+
+
+For this issue we can use redis EXPIRATION, that is, we set an expiration time after that the data is removed from
+the redis cache server. But this cannot be the true solution becoz client might have to wait for some time to see 
+their updated data on the web page.
+
+the foolproof solution for this issue is to store data in redis in the form of nested hashes, that is, recoreded of 
+one user in one hash. The advantage of this is that if some user update his/her data then we can remove the entire
+data that belongs to that user.
+
+-----SEE IMAGE IN NOTES_IMAGE FOLDER NAMED "nested_hash"---------
+
+---------------------------- SOLUTION 3 --------------------------------------------------
+
+
+const query = Person
+  .find({ occupation: /host/ })
+  .where('name.last').equals('Ghost')
+  .where('age').gt(17).lt(66)
+  .where('likes').in(['vaporizing', 'talking'])
+  .limit(10)
+  .sort('-occupation')
+  .select('name occupation');
+
+
+  for query customization issue we can use 
+
+ ------>  query.getOptions();
+
+It will give 
+
+{ find: {occupation: 'host'}, where: [{'name.last' : 'Ghost'}]}  .......
+
+So if we stringigy this query and use it as key then our condition for consistant but unique key can be satisfied
+
+
+------------------------------------------------------------------------------------------------------------------
+
+As we know caching is a very expensive method so we decided not to store all the queries into the redis.
+We can do this by calling a cache function named 'cache()'. That means if we want to cache we call it otherwise 
+default working is without caching  

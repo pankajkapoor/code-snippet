@@ -1,0 +1,3 @@
+
+
+client.set('color','red','EX',5);  // this key-value pair will expire in 5 sec
