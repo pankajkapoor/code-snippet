@@ -1,0 +1,7 @@
+Joi                       ||   for data in body of request
+joi-password-complexity   ||   for increasing the complexity of password
+bcrypt                    ||   hashing the password
+lodash                    ||   
+winston                   ||   for logging the errors on console or file
+express-async-errors      ||   for handling errors
+config                    ||

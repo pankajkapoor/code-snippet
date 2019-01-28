@@ -13,7 +13,7 @@ module.exports = app => {
     res.send(blog);
   });
 
-  app.get('/api/blogs', requireLogin,cleanCache, async (req, res) => {
+  app.get('/api/blogs', requireLogin, async (req, res) => {
 
     const blogs = await Blog
                             .find({_user: req.user.id})
@@ -52,7 +52,7 @@ module.exports = app => {
               // client.set(req.user.id, JSON.stringify(blogs));
 });
 
-  app.post('/api/blogs', requireLogin, async (req, res) => {
+  app.post('/api/blogs', requireLogin, cleancache, async (req, res) => {
     const { title, content } = req.body;
 
     const blog = new Blog({
