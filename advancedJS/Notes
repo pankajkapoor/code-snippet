@@ -1,0 +1,40 @@
+
+
+                                4 pillars of OOP
+                                        |
+                                        |
+        ----------------------------------------------------------------------------------
+        |                                |                       |                       | 
+    Encapsulation                 Abstraction            Inheritance               Polymorphism
+(Reduce complexity +            (Reduce complexity +     (Eliminate              ( refactor ugly
+ increase reusability)          isolate impact of        redundant                  switch case
+                                    changes)                code)                   statements)
+ 
+
+
+
+
+===>  Procedural Programming  ---->  divides the program into a number of funcions
+
+Example of procedural Programming:  
+
+let baseSalary = 30;
+let overtime = 10;
+let rate = 20;
+
+fucntion getWage(baseSalary, overtime, rate) {
+    return baseSalary + (overtime * rate);
+}
+
+Example of OOP:  
+
+let employee = {
+    baseSalary : 30,
+    overtime : 10,
+    rate : 20,
+    getWage : funcion(){
+        return this.baseSalary + (this.overtime * this.rate);
+    } 
+};
+
+employee.getWage();
