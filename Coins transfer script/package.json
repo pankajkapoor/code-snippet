@@ -1,0 +1,22 @@
+{
+  "name": "stellar-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@kinecosystem/kin-sdk": "^0.20.8",
+    "bignumber.js": "^9.0.0",
+    "bitcoinjs-lib": "^5.0.5",
+    "eosjs": "^16.0.9",
+    "lisk-elements": "^2.4.2",
+    "request": "^2.88.0",
+    "ripple-lib": "^1.2.4",
+    "stellar-sdk": "^2.0.1",
+    "web3": "^1.0.0-beta.34"
+  }
+}
