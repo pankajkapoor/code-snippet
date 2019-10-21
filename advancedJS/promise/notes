@@ -1,0 +1,22 @@
+                                        PROMISE
+
+Promise object has to value:
+1) status
+2) value
+
+A promise can ne in 3 states:
+1) PENDING
+2) FULFILLED or
+3) REJECTED
+
+# Promise.all
+# Promise.allSettled (return an object when all the promises are resolved)
+
+# Promise.race (race rejects with the first rejected promise)
+# Promise.any  ('any' rejects when all the promoises rejects)
+
+# Promise.resolve
+# Promise.reject
+
+# Promise.map       (same as 'all' but we can control concurrency of parallel hits)
+# Promise.mapSeries (same as 'map' with concurrency 1)

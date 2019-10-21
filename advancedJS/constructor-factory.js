@@ -44,7 +44,7 @@
 
 // ------------------------------------->
     // calling constructor function without new keyword
-    // then this add properties to the global object
+    // then "this" add properties to the global object
             // function Data(name, age){
             //     this.name = name;
             //     this.age = age;

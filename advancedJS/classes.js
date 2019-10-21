@@ -1,5 +1,5 @@
 // class Rectangle {
-//     constructor(height, width) {     // A constructor can use super keyword to execute the constructor of spuer class.
+//     constructor(height, width) {     // A constructor can use super keyword to execute the constructor of super class.
 //       this.height = height;
 //       this.width = width;
 //     }
@@ -15,7 +15,8 @@
 
 //   --------- CLASS declaration can done by two type --------------------
 
-// // Method:  unnamed
+// //?  Method:  unnamed
+
 // let Rectangle = class {
 //     constructor(height, width) {
 //       this.height = height;
@@ -23,9 +24,10 @@
 //     }
 //   };
 //   console.log(Rectangle.name);
-//   // output: "Rectangle"
+
+// //?  output: "Rectangle"
   
-// // Method:  named
+// //?  Method:  named
 //   let Rectangle1 = class Rectangle2 {
 //     constructor(height, width) {
 //       this.height = height;
@@ -33,7 +35,8 @@
 //     }
 //   };
 //   console.log(Rectangle1.name);
-  // output: "Rectangle2"
+
+// //?  output: "Rectangle2"
 
 //--------------------------------------------------------------------------------------------------->
 
@@ -42,11 +45,11 @@
 //     this.height = height;
 //     this.width = width;
 //   }
-//   // Getter
+// //?   Getter
 //   get area() {
 //     return this.calcArea();
 //   }
-//   // Method
+// //? Method
 //   calcArea() {                          // ES6 syntax for declaring function
 //     return this.height * this.width;
 //   }
