@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 let promise1 = new Promise((resolve, reject)=>{
     setTimeout(function(){
         // console.log('one');
-        reject('one')
+        resolve('one')
     }, 1000);
 });
 
@@ -17,7 +17,7 @@ let promise2 = new Promise((resolve, reject)=>{
 let promise3 = new Promise((resolve, reject)=>{
     setTimeout(function(){
         // console.log('three');
-        reject('three')
+        resolve('three')
     }, 3000);
 });
 let promise4 = new Promise((resolve, reject)=>{
@@ -62,12 +62,12 @@ let promise4 = new Promise((resolve, reject)=>{
 
 //-------------------------------> Promise.any()
 
-Promise.any([promise4, promise2, promise3, promise1])
-       .then(res => console.log('Inside then',res))
-       .catch(err => console.log('err: ',err))
+// Promise.any([promise4, promise2, promise3, promise1])
+//        .then(res => console.log('Inside then',res))
+//        .catch(err => console.log('err: ',err))
 
 //-------------------------------> Promise.race()
 
-Promise.race([promise4, promise2, promise3, promise1])
-       .then(res => console.log('Inside then',res))
-       .catch(err => console.log('err: ',err))
+// Promise.race([promise4, promise2, promise3, promise1])
+//        .then(res => console.log('Inside then',res))
+//        .catch(err => console.log('err: ',err))

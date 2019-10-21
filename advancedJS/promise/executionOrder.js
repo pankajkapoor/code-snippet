@@ -3,7 +3,7 @@
  * resolved/rejected, it will immediately call the subsequent then/catch method, if not it will wait.
  */
 let promise1 = new Promise((resolve, reject)=>{
-    setTimeout(resolve, 0,'foo');
+    setTimeout(resolve, 1000,'foo');
 })
 
 promise1.then( promise1SuccessMessage=>{
@@ -20,9 +20,9 @@ promise1.then( promise1SuccessMessage=>{
 .catch(err => console.log(err));
 
 let promise2 = new Promise((resolve, reject)=>{
-    setTimeout(resolve, 1000, 'two');
+    setTimeout(resolve, 2000, 'two');
 })
 
 let promise3 = new Promise((resolve, reject)=>{
-    setTimeout(resolve, 5000, 'three');
+    setTimeout(resolve, 0, 'three');
 })
