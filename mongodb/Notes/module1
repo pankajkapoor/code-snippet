@@ -1,0 +1,37 @@
+
+MONGODB CONVERT "JSON" FORMAT TO ANOTHER FORMAT FOR STORING, CALLED "BSON" (it is binary version of json and 
+can quired more efficiently).
+
+==> CHARACTERISTICS OF MONGODB
+
+1) No Schema
+2) No/Few Reladtions
+
+
+                                        WORKING WITH MONGODB
+                                                                                                        ______    
+            APPLICATION                        Queries                          DATA                    |    |
+    Frontend     Backend ----> Driver --------------------------->   Mongodb <----> Storage  <------>   |    |
+       (UI)      (server)       (NodeJs)                            (server)         Engine             |____|
+                                                                      ^     Communication     File/Data  
+                                                                      |                         Access
+                                                                      |
+                                                                      |
+                                                                      |
+                        MongoDB Shell ---------------------------------
+
+# Default Storage Engine is "Wired Tiger"
+# Storage Engine loads a chunk of data into memory and manages that such that the data you often use is in memory.
+
+
+
+
+                                                                ______
+                                        DATA                    |    |
+                             Mongodb <----> Storage  <------>   |    |  Read + Write Data in Files (slow)
+                            (server)         Engine             |____|
+                                                ^
+                                                |       _________
+                                                |       |       |
+                                                |_______| memory|  Read + Write Data in Memory(fast)
+                                                        |_______|                                                     
