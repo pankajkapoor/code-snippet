@@ -27,3 +27,107 @@ result:   number
 
 ==============>                            Embedded document vs References
 Use Embedded document when there exists a strong "one to one" relationship
+
+
+
+===============>                            Joining with $lookup
+E.g. Query:
+
+db.books.aggregate([{$lookup:{
+    from: "authors"   (from which colection you want to relate document),
+    localField: "authors"(authors is an array of ObjectId),
+    foreignFiled: "_id" (name of the field of "authors" collecion),
+    as: "creators"  (alias name )
+}}]);
+
+
+================>                          Schema Validation
+E.g. Query:
+
+db.createCollection('posts', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: ['title', 'text', 'creator', 'comments'],
+      properties: {
+        title: {
+          bsonType: 'string',
+          description: 'must be a string and is required'
+        },
+        text: {
+          bsonType: 'string',
+          description: 'must be a string and is required'
+        },
+        creator: {
+          bsonType: 'objectId',
+          description: 'must be an objectid and is required'
+        },
+        comments: {
+          bsonType: 'array',
+          description: 'must be an array and is required',
+          items: {
+            bsonType: 'object',
+            required: ['text', 'author'],
+            properties: {
+              text: {
+                bsonType: 'string',
+                description: 'must be a string and is required'
+              },
+              author: {
+                bsonType: 'objectId',
+                description: 'must be an objectid and is required'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
+===========>                    Modifing collecion usind runCommand and collMod(collecion modifier)
+E.g. Query:
+
+db.runCommand({
+  collMod: 'posts',
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: ['title', 'text', 'creator', 'comments'],
+      properties: {
+        title: {
+          bsonType: 'string',
+          description: 'must be a string and is required'
+        },
+        text: {
+          bsonType: 'string',
+          description: 'must be a string and is required'
+        },
+        creator: {
+          bsonType: 'objectId',
+          description: 'must be an objectid and is required'
+        },
+        comments: {
+          bsonType: 'array',
+          description: 'must be an array and is required',
+          items: {
+            bsonType: 'object',
+            required: ['text', 'author'],
+            properties: {
+              text: {
+                bsonType: 'string',
+                description: 'must be a string and is required'
+              },
+              author: {
+                bsonType: 'objectId',
+                description: 'must be an objectid and is required'
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  validationAction: 'warn'
+});
+
