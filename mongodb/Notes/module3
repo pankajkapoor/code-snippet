@@ -4,7 +4,7 @@
 2) Boolean                                 true/ false
 3) Number                          ------> 55              NumberInt(int32)        
                                      |---> 10000000000000  NumberLong(int64)
-                                     |---> 12.39           NumberDecimal
+                                     |---> 12.39           NumberDecimal()
 4) ObjectId                                ObjectId("asdfa")
 5) ISODate                                 ISODate("2019-10-19")
 6) Embedded document                       { "a": {....}}

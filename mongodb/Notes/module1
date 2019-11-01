@@ -1,11 +1,11 @@
 
 MONGODB CONVERT "JSON" FORMAT TO ANOTHER FORMAT FOR STORING, CALLED "BSON" (it is binary version of json and 
-can quired more efficiently).
+can queried more efficiently).
 
 ==> CHARACTERISTICS OF MONGODB
 
 1) No Schema
-2) No/Few Reladtions
+2) No/Few Relations
 
 
                                         WORKING WITH MONGODB
@@ -21,7 +21,7 @@ can quired more efficiently).
                         MongoDB Shell ---------------------------------
 
 # Default Storage Engine is "Wired Tiger"
-# Storage Engine loads a chunk of data into memory and manages that such that the data you often use is in memory.
+# Storage Engine loads a chunk of data into memory and manages to store the data that you often use in memory.
 
 
 

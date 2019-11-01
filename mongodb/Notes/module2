@@ -14,7 +14,7 @@
 
 # In mongoDB, databases, collections and documents are created automatically (that is implicitly).
 
-# command for connecting shell to a specific port: mongo --port 27018
+# command for connecting shell to a specific port: "mongod --port 27018"
 
                                         CRUD  Operations
     create                                                                       update
