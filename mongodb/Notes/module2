@@ -36,6 +36,8 @@ NOTE: .pretty() is not supported in findOne() command because .pretty() is avali
                                                                                                            parameter, but the _id remains the 
                                                                                                            same.
 
+																										   But updateOne will not work without
+																										   without $set.
 
 => find()
 

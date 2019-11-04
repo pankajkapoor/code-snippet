@@ -2,7 +2,7 @@
 
 1) Text                                    "Some text"
 2) Boolean                                 true/ false
-3) Number                          ------> 55              NumberInt(int32)        
+3) Number                          ------> 55              NumberInt(int32)  signed integer      
                                      |---> 10000000000000  NumberLong(int64)
                                      |---> 12.39           NumberDecimal()
 4) ObjectId                                ObjectId("asdfa")
@@ -10,7 +10,7 @@
 6) Embedded document                       { "a": {....}}
 7) Array                                   { "b": [....]}
 
-# Number stored in mongodb must be 64 bit long (it is the maximum limit)
+# Number stored in mongodb can be atmost 64 bit long (it is the maximum limit)
 
 => typeof command
 E.g : typeof db.numbers.findOne({}).a                    (becoz findOne gives an object {a:1})

@@ -1,5 +1,6 @@
 
-insertOne() and insertMany() returns objectIds as output after saving the documents but insert() doest not gives objectIds as output.
+insertOne() and insertMany() returns objectIds as output after saving the documents but insert() doest not gives objectIds as
+output.
 
 Query: 
     db.hobbies.insertMany([{_id:"sports", name:"sports"}, {_id:"cooking", name:"cooking"}, {_id:"car", name:"car"}]);
@@ -9,7 +10,7 @@ Now if we run this Query:
     db.hobbies.insertMany([{_id:"yoga", name:"yoga"}, {_id:"cooking", name:"cooking"}, {_id:"hiking", name:"hiking"}]);
 
 Here mongodb will add the first document i.e. with _id "yoga" and then throw error because _id "cooking" already exists. As a
-result document with _id "hiking" will not stored in db.
+result, document with _id "hiking" will not stored in db.
             ||
              ===========>  THIS IS CALLED AS "ORDERED INSERTS"
 

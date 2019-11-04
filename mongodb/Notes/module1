@@ -21,7 +21,7 @@ can queried more efficiently).
                         MongoDB Shell ---------------------------------
 
 # Default Storage Engine is "Wired Tiger"
-# Storage Engine loads a chunk of data into memory and manages to store the data that you often use in memory.
+# Storage Engine loads a chunk of data into memory and manages to store the data in memory that is used frequently.
 
 
 
