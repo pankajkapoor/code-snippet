@@ -1,0 +1,9 @@
+================================================>  INDEX <===============================================================================
+
+Query: db.contacts.explain().find({"dob.age": {$gt:60}});    // explain() will give details how this query reterive data
+       
+       db.contacts.explain("executionStats").find({"dob.age": {$gt:60}});
+
+================================================> ADDING AN INDEX <========================================================================
+
+Query: db.contacts.createIndex({"dob.age": 1});  // 1 defines the order ( 1 for asec and -1 for desc)
