@@ -1,4 +1,4 @@
-================================================>  INDEX <===============================================================================
+================================================>  INDEX <=======================================================================
 
 Query: db.contacts.explain().find({"dob.age": {$gt:60}});    // explain() will give details how this query reterive data
        
@@ -93,6 +93,7 @@ Query:
 this query will only index those documents where email field exists, that is, not those where index field does not exists.
 
 ===================================================> TIME-TO-LIVE INDEX <=======================================================
+See "efficient query.png" image
 
 Query: db.sessions.createIndex({createdAt:-1},{expireAfterSeconds: 10});
 
@@ -109,3 +110,88 @@ Query: db.customers.find({name: 'harry'}, {_id:0, name: 1});  // this is what we
 
 As we have created index for name and we have retrived the name only, so it will not search in the collection. It will return the
 data from the index that make it very fast and this will work for COMPOUND INDEXES also. This is what we called covered Queries.
+
+==============================================> MONGODB REJECTION PLAN <=======================================================
+See winning plan image:
+
+=> Mongodb maintain cache of the winning plan. But this cache does not lasts forever, this cache is remove when:
+1) we insert a certain amounts of document (threshold)
+2) Index is rebuilt
+3) Other Indexes are added or removed
+3) Mongodb server is restarted
+
+Query: db.customers.explain("allPlansExecution").find({name: "krishna", age: 16});  // it will give detailed explanation of all
+																					   all the plans(winning and rejected)
+
+==============================================> MULTI-KEY INDEXES <==============================================================
+
+When we index an array or object, this is called as multi-key index. What mongodb does is, it pull out all the elements and
+indexed them separately. That is, if in a collection there are 1000 arrays and each of which contain 4 elements, so it will
+create 4000 indexes which really big.
+
+Compund indexes with multiple multi-key is not possible, whereas, compound indexes with single multi-key is possible.
+
+Query: db.contacts.createIndex({"address.street":1});
+
+Address is an array of objects with street as key in the object. It is possible with multi-key index.
+
+Query: db.contacts.createIndex({addresses: 1, hobbies: 1}); // here addresses and hobbies are both arrays
+
+
+==============================================> TEXT INDEXES <==================================================================
+
+Suppose we have a text "This product is a must-buy for all fans of mordern fiction!" then mongodb stores it as if these are the
+elements of an array.
+
+Mongodb create index using the main words, which we can use to search for this text, and stem them together. That is, words like
+is, the, a, of are removed.
+
+Query: db.products.createIndex({description: "text"}); // if we write 1 or -1 in place of "text" then it will not store this text
+                                                          as separate words
+
+Query: db.products.find({$text: {$search: "awesome"}});        // this will search for the word, "awesome"
+
+		############------------> text indexes are much faster than regex <-------------------###################
+
+		we can only have one text index per collection
+
+==============================================> SORTING TEXT INDEXES <===========================================================
+
+Query: db.products.find({$text: {$search: "awesome t-shirt"}}, {score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}});
+
+==============================================> CREATING COMBINED TEXT INDEXES <===========================================================
+
+text indexes are not removed by 
+		Query: db.products.dropIndexes({description: "text"});
+but it can be removed
+		Query: db.products.dropIndexes("<name_of_index>");
+
+To create combined index:
+			db.products.createIndex({title: "text", description: "text"});  // this index will contain all the keyword of the
+																					 both "title" and "description"
+
+we can also exclude a word from text search
+Query: db.products.find({$text: {$search: "awesome -t-shirt"}});  // this - sign before t-shirt exclude it from search
+
+====================================> SETTING DEFAULT LANGUAGE AND WEIGHTS IN TEXT INDEXES <=====================================
+
+Query: db.products.createIndex({title: "text", description: "text"},{default_language: "english", weights: {
+	title: 1,
+	description: 10
+}}); 
+
+====================================================> BACKGROUND INDEXES <========================================================
+
+There are two ways of creating indexes:
+								|____________________________________________
+								|											|
+								|											|
+							Foreground 									Background
+						  (not suitable for production)
+						  
+Foreground is faster as compared to Background. But foreground locks the collection, that is, we cannot perform any operation on
+that collection. But background will not block the collection.
+
+Query: db.ratings.createIndex({age: 1}, {background: true});
+															
+								
