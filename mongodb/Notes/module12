@@ -1,0 +1,17 @@
+==============================================>  AGGREGATION <==================================================================
+
+                                                COLLECTION
+                                                    |
+                                                    |
+                                                 {$match}
+                                                    |
+            Every stage receives ------------>   {$sort}
+            the output from                         |
+            previous stage                       {$group}
+                                                    |
+                                                 {$group}
+                                                    |
+                                                    |
+                                                  OUTPUT
+
+=> Just like find method aggregate returns a cursor object.
