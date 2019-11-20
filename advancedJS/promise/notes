@@ -4,7 +4,7 @@ Promise object has to value:
 1) status
 2) value
 
-A promise can ne in 3 states:
+A promise can be in 3 states:
 1) PENDING
 2) FULFILLED or
 3) REJECTED
